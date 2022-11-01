@@ -21,3 +21,9 @@ export interface IInfo {
   '4. close': string
 }
 
+export interface ICInfo {
+  '1b. open (USD)': string
+  '2b. high (USD)': string
+  '3b. low (USD)': string
+  '4b. close (USD)': string
+}

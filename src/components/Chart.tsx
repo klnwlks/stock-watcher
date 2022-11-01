@@ -1,10 +1,12 @@
 import type { Component } from "solid-js";
-import type { IInfo } from '../types'
+import type { IInfo, ICInfo } from '../types'
+import { CType } from "../types"; 
 import { onMount, createEffect } from 'solid-js'
 
 interface IProps {
-    data: IInfo[] 
+    data: IInfo[] | ICInfo[] 
     high: number
+    type: CType
 }
 
 const Chart: Component<IProps> = (props) => {
@@ -17,7 +19,8 @@ const Chart: Component<IProps> = (props) => {
 
   createEffect(() => draw(props.data))
 
-  function draw(points: IInfo[]) {
+  // had to get typescript to shutup
+  function draw(points: any[]) {
     points.reverse();
     let x, y;
     let w = cvs.width;
@@ -30,7 +33,12 @@ const Chart: Component<IProps> = (props) => {
     ctx?.beginPath();
     for (let i = 0; i < points.length; i++) {
       // improve this equation
-      y = h - (+ points[i]['2. high'] / (props.high * 1.75) * h);
+      if (props.type == CType.STOCK) {
+	y = h - (+ points[i]['2. high'] / (props.high * 1.75) * h);
+      } else {
+	y = h - (+ points[i]['2b. high (USD)'] / (props.high * 1.75) * h);
+      }
+      
       x = (w / points.length) * i;
 
       ctx?.lineTo(x, y);

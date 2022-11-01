@@ -1,17 +1,17 @@
-enum CType{
-  CRYPTO,
-  STOCK
+export enum CType{
+  CRYPTO = 'CRYPTO',
+  STOCK = 'TIME_SERIES'
 }
 
 export interface ITicker {
   symbol: string
   type: CType
-  key?: string | Boolean
+  key?: string
   top?: Boolean
 }
 
 export interface ICompanyInfo {
-  [key: string]: string  
+  [key: string]: any 
 }
 
 export interface IInfo {
@@ -21,18 +21,3 @@ export interface IInfo {
   '4. close': string
 }
 
-interface IInterval {
-  'Meta Data': {[key: string]: any}
-}
-
-export interface IIntraday extends IInterval {
-  'Time Series (60min)': {[key: string]: any}
-}
-
-export interface IDaily extends IInterval {
-  'Time Series (Daily)': {[key: string]: any}
-}
-
-export interface IWeekly extends IInterval {
-  'Time Series (Weekly)': {[key: string]: any}
-}

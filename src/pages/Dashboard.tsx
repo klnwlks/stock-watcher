@@ -1,14 +1,12 @@
 import type { Component } from 'solid-js'; 
 import type { ITicker } from '../types'
-import { createEffect, createSignal, onMount, For } from 'solid-js'; 
+import { createSignal, onMount, For } from 'solid-js'; 
 
 import Stock from '../components/Stock';
-import logo from './logo.svg';
 import styles from './Dashboard.module.scss';
-import axios from 'axios'
 
 const Dashboard: Component = () => {
-  const [key, setKey] = createSignal<string | Boolean>(false);
+  const [key, setKey] = createSignal<string>();
   const [tickers, setTickers] = createSignal<ITicker[]>();
 
   onMount(() => {
@@ -29,6 +27,7 @@ const Dashboard: Component = () => {
       <div class={styles.list}>
 	<For each={tickers()}>{(tick: ITicker) =>
 	    <Stock symbol={tick.symbol} 
+	    type={tick.type}
 	    key={key()}
 	    />
 	}</For>

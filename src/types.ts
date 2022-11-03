@@ -10,10 +10,6 @@ export interface ITicker {
   top?: Boolean
 }
 
-export interface ICompanyInfo {
-  [key: string]: any 
-}
-
 export interface IInfo {
   '1. open': string
   '2. high': string
@@ -26,4 +22,8 @@ export interface ICInfo {
   '2b. high (USD)': string
   '3b. low (USD)': string
   '4b. close (USD)': string
+}
+
+export interface ITheme {
+  [key: string]: string
 }

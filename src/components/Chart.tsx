@@ -20,7 +20,7 @@ const Chart: Component<IProps> = (props) => {
   createEffect(() => draw(props.data))
 
   // had to get typescript to shutup
-  function draw(points: any[]) {
+  const draw = (points: any[]) => {
     points.reverse();
     let x, y;
     let w = cvs.width;

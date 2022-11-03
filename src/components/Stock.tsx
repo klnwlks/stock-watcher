@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'; 
-import type { ITicker, IInfo, ICompanyInfo } from '../types';
+import type { ITicker, IInfo } from '../types';
 import { CType } from '../types'; 
 import { onMount, createSignal, Show } from 'solid-js'; 
 import APIreq from '../request'
@@ -7,12 +7,9 @@ import APIreq from '../request'
 import Chart from './Chart'
 
 const Stock: Component<ITicker> = (props) => {
-  const [info, setInfo] = createSignal<ICompanyInfo>();
   const [graph, setGraph] = createSignal<IInfo[]>();
 
   onMount(async () => {
-    setInfo(await APIreq(props.symbol, 'OVERVIEW', props.key!));
-
     let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
     let i = Object.keys(data['Time Series (Daily)']).slice(0, 10);
     let i2: IInfo[] = [];
@@ -24,7 +21,7 @@ const Stock: Component<ITicker> = (props) => {
     setGraph(i2);
   });
 
-  async function changeGraph(type: string) {
+  const changeGraph = async (type: string) => {
     let func = '', dkey: string = '';
     switch (type) {
       case 'f':
@@ -66,10 +63,6 @@ const Stock: Component<ITicker> = (props) => {
 	    ^ {(((+ graph()![0]['2. high'] - + graph()![1]['2. high'])
 	        / + graph()![1]['2. high']) * 100).toFixed(2)}%
 	    </h2>
-	  </Show>
-
-	  <Show when={info()}>
-	    <p>{info()!.Name}</p>
 	  </Show>
 
 	  <div class='tabs'>

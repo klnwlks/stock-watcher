@@ -21,7 +21,7 @@ const Crypto: Component<ITicker> = (props) => {
     setGraph(i2);
   });
 
-  async function changeGraph(type: string) {
+  const changeGraph = async (type: string) => {
     let func = '', dkey: string = '';
     switch (type) {
       case 'f':

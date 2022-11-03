@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'; 
-import { createSignal, onMount, For, Show } from 'solid-js';
+import { createSignal, For, Show } from 'solid-js';
 import { createStore } from 'solid-js/store'
 import { useKey } from '../KSContext'; 
 
@@ -12,8 +12,10 @@ const Settings: Component = () => {
 
   const keySubmit = (e: SubmitEvent) => {
     e.preventDefault();
-    add(tempkey);
+    add(tempkey());
   }
+
+
   return (
     <div class={styles.settings}>
 	<section>
@@ -24,7 +26,7 @@ const Settings: Component = () => {
 	    }</For>
 	  </Show>
 
-	  <form >
+	  <form onSubmit={keySubmit}>
 	    <input type='text'
 	    value={tempkey()}
 	    onChange={(e) => setTK(e.currentTarget.value)}

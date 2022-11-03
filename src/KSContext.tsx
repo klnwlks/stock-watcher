@@ -11,13 +11,13 @@ export const KeyProvider = (props: any) => {
       {
 	add(s: string) {
 	  setKey(k => [...k, s])
-	  localStorage.api = JSON.stringify(keys)
+	  localStorage.api = JSON.stringify(keys())
 	},
 	remove(s: string) {
 	  setKey(keys().filter((k) => {
 	    return k !== s
 	  }))
-	  localStorage.api = JSON.stringify(keys)
+	  localStorage.api = JSON.stringify(keys())
 	}
       }
     ];

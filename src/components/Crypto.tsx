@@ -49,7 +49,6 @@ const Crypto: Component<ITicker> = (props) => {
     }
 
     setGraph(iarr);
-    console.log(graph())
   }
 
   return (

@@ -12,6 +12,10 @@ const Settings: Component = () => {
     setTickers(a => [...a, i])
   }
 
+  function addKey(k: string) {
+    setKey(a => [...a, k])
+  }
+
   onMount(() => {
     if (localStorage.api) {
       setKey(JSON.parse(localStorage.api));

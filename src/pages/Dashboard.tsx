@@ -18,7 +18,6 @@ const Dashboard: Component = () => {
 
     if (localStorage['tickers']) {
       setTickers(JSON.parse(localStorage.tickers));
-      console.log(tickers());
       let t = tickers();
       setTickers(t!.sort((a: ITicker, b: ITicker) => + a.top! - + b.top!))
     }

@@ -52,7 +52,6 @@ const Stock: Component<ITicker> = (props) => {
     }
 
     setGraph(iarr);
-    console.log(graph())
   }
 
   return (

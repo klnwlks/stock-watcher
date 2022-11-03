@@ -8,13 +8,11 @@ export default async function APIreq(symbol: string, func: string, keys: string[
     .then(async (res) => {
       while ('Note' in res.data && i < keys.length) {
 	i++;	
-	console.log('switching key..')
 	res.data = await axios.get(`${baseURL}?function=${func}&symbol=${symbol}&apikey=${keys[0]}`)
 			.then((rres) => {return rres.data})
       }
 
       if (i <= keys.length) {
-	console.log('429')
 	setTimeout(async () => {
 	  res.data = await axios.get(`${baseURL}?function=${func}&symbol=${symbol}&apikey=${keys[0]}`)
 			  .then((rres) => {return rres.data})

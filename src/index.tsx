@@ -8,8 +8,8 @@ import App from './App';
 
 render(() => (
   <Router>
-    <KeyProvider count={
-      localStorage.api ? JSON.parse(localStorage.api) : 0
+    <KeyProvider keys={
+      localStorage.api ? JSON.parse(localStorage.api) : undefined
     }>
       <App /> 
     </KeyProvider>

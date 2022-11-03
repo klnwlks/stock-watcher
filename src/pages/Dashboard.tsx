@@ -11,7 +11,7 @@ import styles from './Dashboard.module.scss';
 const Dashboard: Component = () => {
   // i know there's a TS error here, but for the love of god, it's been an hour and the only 
   // issue i've found mentioning this has a fix that doesn't work.
-  const [key, {}] = useKey();
+  const [key] = useKey();
   const [tickers, setTickers] = createSignal<ITicker[]>([]);
 
   onMount(() => {

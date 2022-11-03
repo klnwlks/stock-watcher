@@ -14,7 +14,7 @@ const Stock: Component<ITicker> = (props) => {
     setInfo(await APIreq(props.symbol, 'OVERVIEW', props.key!));
 
     let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
-    let i = Object.keys(data['Time Series (Daily)']).slice(0, 10).reverse();
+    let i = Object.keys(data['Time Series (Daily)']).slice(0, 10);
     let i2: IInfo[] = [];
 
     for (let j = 0; j < i.length; j++) {

@@ -1,12 +1,15 @@
 import type { Component } from 'solid-js';
 import { Routes, Route } from '@solidjs/router'
-import { lazy } from 'solid-js';
+import { lazy, onMount,  } from 'solid-js';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Settings = lazy(() => import('./pages/Settings'));
 import Header from './components/Header'
 
 const App: Component = () => {
+  onMount(() => {
+  })
+
   return (
     <>
       <Header />

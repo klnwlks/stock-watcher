@@ -5,7 +5,7 @@ export enum CType{
 
 export interface ITicker {
   symbol: string
-  type: CType
+  type: string
   key?: string[]
   top?: Boolean
 }

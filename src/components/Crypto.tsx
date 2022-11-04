@@ -10,12 +10,12 @@ const Crypto: Component<ITicker> = (props) => {
   const [graph, setGraph] = createSignal<ICInfo[]>();
 
   onMount(async () => {
-    let data = await APIreq(props.symbol, 'DIGITAL_CURRENCY_DAILY', props.key!);
-    let i = Object.keys(data['Time Series (Digital Currency Daily)']).slice(0, 10).reverse();
+    let data = await APIreq(props.symbol, 'DIGITAL_CURRENCY_DAILY&market=USD', props.key!);
+    let i = Object.keys(data['Time Series (Digital Currency Daily)']).slice(0, 10);
     let i2: ICInfo[] = [];
 
     for (let j = 0; j < i.length; j++) {
-      i2.push(data['Digital Currency (Daily)'][i[j]]) ;
+      i2.push(data['Time Series (Digital Currency Daily)'][i[j]]) ;
     }
 
     setGraph(i2);
@@ -25,17 +25,17 @@ const Crypto: Component<ITicker> = (props) => {
     let func = '', dkey: string = '';
     switch (type) {
       case 'f':
-	func = 'CRYPTO_INTRADAY&interval=5min';
+	func = 'CRYPTO_INTRADAY&interval=5min&market=USD';
 	dkey = 'Time Series Crypto (5min)';
 	break;
 
       case 'd':
-	func = 'DIGITAL_CURRENCY_DAILY';
+	func = 'DIGITAL_CURRENCY_DAILY&market=USD';
 	dkey = 'Time Series (Digital Currency Daily)';
 	break;
 
       case 'w':
-	func = 'DIGITAL_CURRENCY_WEEKLY';
+	func = 'DIGITAL_CURRENCY_WEEKLY&market=USD';
 	dkey = 'Time Series (Digital Currency Weekly)';
 	break;
     }

@@ -1,6 +1,5 @@
 import type { Component } from 'solid-js'; 
 import type { ITicker } from '../types'
-import { CType } from '../types';
 import { createSignal, onMount, For, Show } from 'solid-js'; 
 import { useKey } from '../KSContext'; 
 
@@ -26,7 +25,7 @@ const Dashboard: Component = () => {
     <div class={styles.dashboard}>
       <div class={styles.list}>
 	<For each={tickers()}>{(tick: ITicker) =>
-	  <Show when={tick.type = CType.STOCK}
+	  <Show when={tick.type === 'STOCK'}
 	    fallback={<Crypto symbol={tick.symbol} type={tick.type} key={key()}/>}
 	  >	
 	    <Stock symbol={tick.symbol} 

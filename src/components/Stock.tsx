@@ -55,6 +55,7 @@ const Stock: Component<ITicker> = (props) => {
     <div>
       <div class='info'>
 	  <h1>{`$${props.symbol}`}</h1>	
+	  <h2>stock</h2>
 	  
 	  <Show when={graph()}>
 	    <h2>${+ graph()![0]['2. high']}</h2>

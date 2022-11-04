@@ -10,6 +10,8 @@ const Stock: Component<ITicker> = (props) => {
   const [graph, setGraph] = createSignal<IInfo[]>();
 
   onMount(async () => {
+    // odd workaround to a bug
+    if (props.type == 'CRYPTO') return;
     let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
     let i = Object.keys(data['Time Series (Daily)']).slice(0, 10);
     let i2: IInfo[] = [];
@@ -55,7 +57,6 @@ const Stock: Component<ITicker> = (props) => {
     <div>
       <div class='info'>
 	  <h1>{`$${props.symbol}`}</h1>	
-	  <h2>stock</h2>
 	  
 	  <Show when={graph()}>
 	    <h2>${+ graph()![0]['2. high']}</h2>

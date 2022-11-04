@@ -20,7 +20,6 @@ export default async function APIreq(symbol: string, func: string, keys: string[
 	  }, 60000);
 	}
       }
-      console.log(res)
 
       return res.data;
     }).catch((err) => console.log(err));

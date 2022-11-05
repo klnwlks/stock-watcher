@@ -3,11 +3,29 @@
   justify-content: space-between;
   padding: 1% 4%;
   background: var(--bg);
-  height: 5vh;
-  width: 90%;
+
+  .links {
+    display: flex;
+    align-items: center;
+
+    h2 {
+      color: var(--fg);
+      font-size: 0.9rem;
+      margin-right: 5%;
+    }
+
+    span {
+      color: var(--fg2);
+    }
+  }
+
+  .misc {
+    display: flex;
+    align-items: center;
+  }
   
   .links a, .misc a {
-    margin: 0 4%; 
+    margin: 0 5%; 
     text-decoration: none;
     color: var(--fg2);
     transition: color 250ms ease;

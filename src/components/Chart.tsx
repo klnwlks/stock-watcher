@@ -5,7 +5,7 @@ import { onMount, createEffect, createSignal } from 'solid-js'
 
 interface IProps {
   // ????????/
-  data: (string | (ICInfo | IInfo))[]
+  data: (string | (ICInfo | IInfo))[][]
   high: number
   type: CType
 }
@@ -40,10 +40,11 @@ const Chart: Component<IProps> = (props) => {
 
   // had to get typescript to shutup
   const draw = (points: any[]) => {
-    let x, y, w = cvs.width, h = cvs.height;
+    let x = 0, y, w = cvs.width, h = cvs.height;
     let info = '';
     let ctx: CanvasRenderingContext2D | null;
     let fg = getComputedStyle(document.body).getPropertyValue('--fg');
+    let fg2 = getComputedStyle(document.body).getPropertyValue('--fg2');
     let font = getComputedStyle(document.body).getPropertyValue('--font');
 
     if (props.type == CType.STOCK) {
@@ -61,11 +62,10 @@ const Chart: Component<IProps> = (props) => {
 
     y = h - (+ points[points.length - 1][1][info] / (props.high * 1.75) * h);
     
-    ctx?.moveTo(0, y);
-    ctx?.fillText(points[points.length - 1][1][info].slice(0, 7), 0, y);
-
     let j = 0;
     for (let i = points.length - 1; i >= 0; i--) {
+      ctx?.lineTo(x, y);
+      ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
       x = (w / points.length) * (j + 1);
 
       if (view()) {
@@ -76,14 +76,11 @@ const Chart: Component<IProps> = (props) => {
       }
 
       y = h - (+ points[i][1][info] / (props.high * 1.75) * h);
-
-      ctx?.lineTo(x, y);
-      ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
-
       j++;
     }
+    ctx?.lineTo(w, y);
 
-    ctx!.strokeStyle = fg;
+    ctx!.strokeStyle = view() ? fg2 : fg;
     ctx?.stroke()
   }
 

@@ -7,6 +7,11 @@ const Header: Component = () => {
   return (
     <div id='header' class={styles.header}>
       <div class={styles.links}>
+	<h2>
+	  stock
+	  <br />
+	  <span>watcher</span>
+	</h2>
 	<A href='/'>dashboard</A>
 	<A href='/settings'>settings</A>
       </div>

@@ -8,7 +8,7 @@ import Chart from './Chart'
 import styles from './Stock.module.scss'
 
 const Stock: Component<ITicker> = (props) => {
-  const [graph, setGraph] = createSignal<any>();
+  const [graph, setGraph] = createSignal<any[][]>();
 
   onMount(async () => {
     // odd workaround to a bug
@@ -16,7 +16,6 @@ const Stock: Component<ITicker> = (props) => {
     let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
     let i = Object.entries(data['Time Series (Daily)']).slice(0,20);
 
-    console.log(i)
     setGraph(i);
   });
 

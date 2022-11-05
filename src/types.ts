@@ -8,6 +8,8 @@ export interface ITicker {
   type: string
   key?: string[]
   top?: Boolean
+  remove?: (s: string) => void;
+  edit?: (symbol: string) => void;
 }
 
 export interface IInfo {

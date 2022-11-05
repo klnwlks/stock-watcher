@@ -1,7 +1,7 @@
 // naming things is hard
 import { createSignal, createContext, useContext, Accessor } from "solid-js";
 
-type KeyStore = (Accessor<string[]> | { add(s: string): void; remove(s: string): void } | undefined)[]
+export type KeyStore = (Accessor<string[]> | { add(s: string): void; remove(s: string): void } | undefined)[]
 
 const KeyContext = createContext<KeyStore>();
 

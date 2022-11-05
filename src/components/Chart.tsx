@@ -64,10 +64,6 @@ const Chart: Component<IProps> = (props) => {
     
     let j = 0;
     for (let i = points.length - 1; i >= 0; i--) {
-      ctx?.lineTo(x, y);
-      ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
-      x = (w / points.length) * (j + 1);
-
       if (view()) {
 	ctx?.moveTo(x, 0)
 	ctx?.lineTo(x, h);
@@ -75,7 +71,10 @@ const Chart: Component<IProps> = (props) => {
 	ctx?.fillText(points[i][0], x - 5, y);
       }
 
+      ctx?.lineTo(x, y);
       y = h - (+ points[i][1][info] / (props.high * 1.75) * h);
+      ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
+      x = (w / points.length) * (j + 1);
       j++;
     }
     ctx?.lineTo(w, y);

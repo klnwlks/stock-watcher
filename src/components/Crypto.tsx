@@ -46,7 +46,13 @@ const Crypto: Component<ITicker> = (props) => {
     <div class={styles.item}>
       <div class={styles.info}>
 	<div>
-	  <h1>{`$${props.symbol}`}</h1>	
+	  <div class={styles.symbol}>
+	    <h1>{`$${props.symbol} `}</h1>	
+	    <Show when={props.top} 
+		fallback={<h3 onClick={() => props.edit!(props.symbol)}>☆</h3>}>
+	      <h3 onClick={() => props.edit!(props.symbol)}>★</h3>
+	    </Show>
+	  </div>
 	  
 	  <Show when={graph()}>
 	    <h2><span>＄</span>{+ graph()![0][1]['2b. high (USD)']}</h2>
@@ -71,6 +77,8 @@ const Crypto: Component<ITicker> = (props) => {
 	      weekly
 	    </p>
 	  </div>
+
+	  <h4 onClick={() => props.remove!(props.symbol)}>remove</h4>
 	</div>
       </div>
 

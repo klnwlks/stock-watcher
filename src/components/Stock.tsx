@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'; 
-import type { ITicker, IInfo } from '../types';
+import type { ITicker } from '../types';
 import { CType } from '../types'; 
 import { onMount, createSignal, Show } from 'solid-js'; 
 import APIreq from '../request'
@@ -8,20 +8,16 @@ import Chart from './Chart'
 import styles from './Stock.module.scss'
 
 const Stock: Component<ITicker> = (props) => {
-  const [graph, setGraph] = createSignal<IInfo[]>();
+  const [graph, setGraph] = createSignal<any>();
 
   onMount(async () => {
     // odd workaround to a bug
     if (props.type == 'CRYPTO') return;
     let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
-    let i = Object.keys(data['Time Series (Daily)']).slice(0, 20);
-    let i2: IInfo[] = [];
+    let i = Object.entries(data['Time Series (Daily)']).slice(0,20);
 
-    for (let j = 0; j < i.length; j++) {
-      i2.push(data['Time Series (Daily)'][i[j]]) ;
-    }
-
-    setGraph(i2);
+    console.log(i)
+    setGraph(i);
   });
 
   const changeGraph = async (type: string) => {
@@ -43,15 +39,10 @@ const Stock: Component<ITicker> = (props) => {
 	break;
     }
 
-    let res = await APIreq(props.symbol, func, props.key!);
-    let keys = Object.keys(res[dkey]).slice(0, 20);
-    let iarr: IInfo[] = [];
+    let data = await APIreq(props.symbol, func, props.key!);
+    let i = Object.entries(data[dkey]).slice(0,20);
 
-    for (let i = 0; i < keys.length; i++) {
-      iarr.push(res[dkey][keys[i]])
-    }
-
-    setGraph(iarr);
+    setGraph(i);
   }
 
   return (
@@ -61,11 +52,11 @@ const Stock: Component<ITicker> = (props) => {
 	<h1>{`$${props.symbol}`}</h1>	
 	  
 	  <Show when={graph()}>
-	    <h2> <span>＄</span>{+ graph()![0]['2. high']}</h2>
+	    <h2> <span>＄</span>{+ graph()![0][1]['2. high']}</h2>
 	    {/* calculate percentage increase */}
 	    <h2>
-	    <span>⇧</span>{(((+ graph()![0]['2. high'] - + graph()![1]['2. high'])
-	        / + graph()![1]['2. high']) * 100).toFixed(2)}%
+	    <span>⇧</span>{(((+ graph()![0][1]['2. high'] - + graph()![1][1]['2. high'])
+	        / + graph()![1][1]['2. high']) * 100).toFixed(2)}%
 	    </h2>
 	  </Show>
 	</div>
@@ -88,7 +79,7 @@ const Stock: Component<ITicker> = (props) => {
 
       <div class={styles.canvasCont}>
 	<Show when={graph()}>
-	    <Chart data={graph()!} high={+ graph()![0]['2. high']} type={CType.STOCK}/>
+	    <Chart data={graph()!} high={+ graph()![0][1]['2. high']} type={CType.STOCK}/>
 	</Show>
       </div>
     </div>

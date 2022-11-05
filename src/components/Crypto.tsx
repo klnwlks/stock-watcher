@@ -8,18 +8,13 @@ import Chart from './Chart'
 import styles from './Stock.module.scss'
 
 const Crypto: Component<ITicker> = (props) => {
-  const [graph, setGraph] = createSignal<ICInfo[]>();
+  const [graph, setGraph] = createSignal<any>();
 
   onMount(async () => {
     let data = await APIreq(props.symbol, 'DIGITAL_CURRENCY_DAILY&market=USD', props.key!);
-    let i = Object.keys(data['Time Series (Digital Currency Daily)']).slice(0, 20);
-    let i2: ICInfo[] = [];
+    let i = Object.entries(data['Time Series (Digital Currency Daily)']).slice(0,20);
 
-    for (let j = 0; j < i.length; j++) {
-      i2.push(data['Time Series (Digital Currency Daily)'][i[j]]) ;
-    }
-
-    setGraph(i2);
+    setGraph(i);
   });
 
   const changeGraph = async (type: string) => {
@@ -41,15 +36,10 @@ const Crypto: Component<ITicker> = (props) => {
 	break;
     }
 
-    let res = await APIreq(props.symbol, func, props.key!);
-    let keys = Object.keys(res[dkey]).slice(0, 20);
-    let iarr: ICInfo[] = [];
+    let data = await APIreq(props.symbol, func, props.key!);
+    let i = Object.entries(data[dkey]).slice(0,20);
 
-    for (let i = 0; i < keys.length; i++) {
-      iarr.push(res[dkey][keys[i]])
-    }
-
-    setGraph(iarr);
+    setGraph(i);
   }
 
   return (
@@ -59,11 +49,11 @@ const Crypto: Component<ITicker> = (props) => {
 	  <h1>{`$${props.symbol}`}</h1>	
 	  
 	  <Show when={graph()}>
-	    <h2><span>＄</span>{+ graph()![0]['2b. high (USD)']}</h2>
+	    <h2><span>＄</span>{+ graph()![0][1]['2b. high (USD)']}</h2>
 	    {/* calculate percentage increase */}
 	    <h2>
-	    <span>⇧</span>{(((+ graph()![0]['2b. high (USD)'] - + graph()![1]['2b. high (USD)'])
-	        / + graph()![1]['2b. high (USD)']) * 100).toFixed(2)}%
+	    <span>⇧</span>{(((+ graph()![0][1]['2b. high (USD)'] - + graph()![1][1]['2b. high (USD)'])
+	        / + graph()![1][1]['2b. high (USD)']) * 100).toFixed(2)}%
 	    </h2>
 	  </Show>
 	</div>
@@ -86,7 +76,7 @@ const Crypto: Component<ITicker> = (props) => {
 
       <div class={styles.canvasCont}>
 	<Show when={graph()}>
-	    <Chart data={graph()!} high={+ graph()![0]['2b. high (USD)']}
+	    <Chart data={graph()!} high={+ graph()![0][1]['2b. high (USD)']}
 	      type={CType.CRYPTO}
 	    />
 	</Show>

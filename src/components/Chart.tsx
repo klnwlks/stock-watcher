@@ -57,7 +57,7 @@ const Chart: Component<IProps> = (props) => {
       x = (w / points.length) * (i + 1);
 
       ctx?.lineTo(x, y);
-      ctx?.fillText(points[i][info].slice(0, 5), x, y);
+      ctx?.fillText(points[i][info].slice(0, 7), x, y);
     }
     ctx?.stroke()
   }

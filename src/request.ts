@@ -14,6 +14,7 @@ export default async function APIreq(symbol: string, func: string, keys: string[
 	if (i + 1 == keys.length) {
 	  console.log('restarting call')
 	  setTimeout(async () => {
+	    // doesnt work plsfix
 	    console.log('calling')
 	    res.data = await axios.get(`${baseURL}?function=${func}&symbol=${symbol}&apikey=${keys[0]}`)
 		    .then((rres) => {return rres.data});

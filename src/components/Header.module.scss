@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 2%;
+
+  .links a, .misc a {
+    padding: 0 2%; 
+    text-decoration: none;
+  }
+}

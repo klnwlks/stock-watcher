@@ -5,13 +5,14 @@ import { CType } from '../types';
 import APIreq from '../request'
 
 import Chart from './Chart'
+import styles from './Stock.module.scss'
 
 const Crypto: Component<ITicker> = (props) => {
   const [graph, setGraph] = createSignal<ICInfo[]>();
 
   onMount(async () => {
     let data = await APIreq(props.symbol, 'DIGITAL_CURRENCY_DAILY&market=USD', props.key!);
-    let i = Object.keys(data['Time Series (Digital Currency Daily)']).slice(0, 10);
+    let i = Object.keys(data['Time Series (Digital Currency Daily)']).slice(0, 20);
     let i2: ICInfo[] = [];
 
     for (let j = 0; j < i.length; j++) {
@@ -41,7 +42,7 @@ const Crypto: Component<ITicker> = (props) => {
     }
 
     let res = await APIreq(props.symbol, func, props.key!);
-    let keys = Object.keys(res[dkey]).slice(0, 10);
+    let keys = Object.keys(res[dkey]).slice(0, 20);
     let iarr: ICInfo[] = [];
 
     for (let i = 0; i < keys.length; i++) {
@@ -52,8 +53,9 @@ const Crypto: Component<ITicker> = (props) => {
   }
 
   return (
-    <div>
-      <div class='info'>
+    <div class={styles.item}>
+      <div class={styles.info}>
+	<div>
 	  <h1>{`$${props.symbol}`}</h1>	
 	  
 	  <Show when={graph()}>
@@ -64,22 +66,25 @@ const Crypto: Component<ITicker> = (props) => {
 	        / + graph()![1]['2b. high (USD)']) * 100).toFixed(2)}%
 	    </h2>
 	  </Show>
+	</div>
 
-	  <div class='tabs'>
-	    Interval
-	    <p class='link' onClick={() => changeGraph('f')}>
+	<div class={styles.tab}>
+	  <h4>Interval</h4>
+	  <div class={styles.cont}>
+	    <p onClick={() => changeGraph('f')}>
 	      5min
 	    </p>
-	    <p class='link' onClick={() => changeGraph('d')}>
+	    <p onClick={() => changeGraph('d')}>
 	      daily
 	    </p>
-	    <p class='link' onClick={() => changeGraph('w')}>
+	    <p onClick={() => changeGraph('w')}>
 	      weekly
 	    </p>
 	  </div>
+	</div>
       </div>
 
-      <div class='canvas'>
+      <div class={styles.canvasCont}>
 	<Show when={graph()}>
 	    <Chart data={graph()!} high={+ graph()![0]['2b. high (USD)']}
 	      type={CType.CRYPTO}

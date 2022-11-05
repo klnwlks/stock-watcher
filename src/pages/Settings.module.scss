@@ -1,19 +1,38 @@
 .settings {
+  font-family: var(--font);
   padding: 4%;
+  background: var(--bg);
+  color: var(--fg2);
+  height: 78vh;
 
   p, label, input {
     font-size: 1.3rem;
   }
 
-   input[type='text'], input[type='submit'] {
-     border: none;
-     border-radius: 8px;
-   }
+  h1 {
+    color: var(--fg)
+  }
+
+  input[type='text'], input[type='submit'] {
+    border: none;
+    border-radius: 8px;
+    padding: 1% 2%;
+    background: var(--bg2);
+    color: var(--fg2);
+  }
 
   .key {
     margin-bottom: 5%;
     .content {
       padding-left: 2%;
+    }
+
+    p:hover {
+      cursor: pointer;
+    }
+
+    input[type='text'] {
+      margin-right: 1%;
     }
   }
 
@@ -27,8 +46,20 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 2%;
+
 	div {
 	  width: 60%;
+	  display: flex;
+
+	  input[type='color'] {
+	    height: 100%; 
+	    align-self: center;
+	    background: var(--bg2);
+	    border: none;
+	    margin-left: 1%;
+	    border-radius: 5px;
+	    padding: 2px;
+	  }
 	}
 
 	label {

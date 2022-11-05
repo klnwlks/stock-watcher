@@ -23,6 +23,7 @@ const Dashboard: Component = () => {
 
   return (
     <div class={styles.dashboard}>
+      <h1>Watchlist</h1>
       <div class={styles.list}>
 	<For each={tickers()}>{(tick: ITicker) =>
 	  <Show when={tick.type === 'STOCK'}

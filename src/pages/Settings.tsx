@@ -11,13 +11,20 @@ const Settings: Component = () => {
   const [key, {add, remove}] = useKey();
   const [style, setStyles] = createStore<ITheme>();
   const [tempkey, setTK] = createSignal<string>('');
-  // add defaults later
-  let defTheme: ITheme;
 
   onMount(() => {
-    if (localStorage.theme) setStyles(JSON.parse(localStorage.theme)) 
-    else setStyles(defTheme)
+    setStyles({
+      bg: getStyle('bg'),
+      bg2: getStyle('bg2'),
+      fg: getStyle('fg'),
+      fg2: getStyle('fg2'),
+      font: getStyle('font')
+    })
   })
+
+  const getStyle = (key: string) => {
+    return getComputedStyle(document.documentElement).getPropertyValue(`--${key}`).trim(); 
+  }
 
   const keySubmit = (e: SubmitEvent) => {
     e.preventDefault();
@@ -25,7 +32,6 @@ const Settings: Component = () => {
   }
 
   const saveTheme = (e: SubmitEvent) => {
-    e.preventDefault();
     localStorage.theme = JSON.stringify(style);
   }
 
@@ -37,7 +43,7 @@ const Settings: Component = () => {
 	  <div class={styles.content}>
 	    <Show when={key().length > 0}>
 	      <For each={key()}>{(key: string) => 
-		<p onClick={() => remove(key)}>{`${key} -remove`}</p>
+		<p onClick={() => remove(key)}>{`${key} - remove`}</p>
 	      }</For>
 	    </Show>
 
@@ -87,22 +93,22 @@ const Settings: Component = () => {
 
 	    <div class={styles.edit}>
 	      <label>
-		main
+		main fg
 	      </label>
 
 	      <div>
-		<input value={style.fg1} type='text'
-		onChange={(e) => setStyles('fg1', e.currentTarget.value)}
+		<input value={style.fg} type='text'
+		onChange={(e) => setStyles('fg', e.currentTarget.value)}
 		pattern='^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$' />
 		<input type='color' value={style.fg1} 
-		onChange={(e) => setStyles('fg1', e.currentTarget.value)}
+		onChange={(e) => setStyles('fg', e.currentTarget.value)}
 		/>
 	      </div>
 	    </div>
 
 	    <div class={styles.edit}>
 	      <label>
-		sub
+		sub fg
 	      </label>
 	      
 	      <div>

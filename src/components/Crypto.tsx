@@ -59,10 +59,10 @@ const Crypto: Component<ITicker> = (props) => {
 	  <h1>{`$${props.symbol}`}</h1>	
 	  
 	  <Show when={graph()}>
-	    <h2>${+ graph()![0]['2b. high (USD)']}</h2>
+	    <h2><span>＄</span>{+ graph()![0]['2b. high (USD)']}</h2>
 	    {/* calculate percentage increase */}
 	    <h2>
-	    ^ {(((+ graph()![0]['2b. high (USD)'] - + graph()![1]['2b. high (USD)'])
+	    <span>⇧</span>{(((+ graph()![0]['2b. high (USD)'] - + graph()![1]['2b. high (USD)'])
 	        / + graph()![1]['2b. high (USD)']) * 100).toFixed(2)}%
 	    </h2>
 	  </Show>

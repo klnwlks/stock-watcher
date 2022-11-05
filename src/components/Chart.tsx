@@ -27,13 +27,17 @@ const Chart: Component<IProps> = (props) => {
     let x, y;
     let w = cvs.width;
     let h = cvs.height;
-    let info = ''
+    let info = '';
     let ctx: CanvasRenderingContext2D | null;
+    let fg = getComputedStyle(document.body).getPropertyValue('--fg');
+    let font = getComputedStyle(document.body).getPropertyValue('--font');
 
     ctx = cvs.getContext('2d'); 
-    ctx!.clearRect(0, 0, w, h);
+    ctx?.clearRect(0, 0, w, h);
 
     ctx?.beginPath();
+    ctx!.fillStyle = fg;
+    ctx!.font = `15px ${font}`
 
     if (props.type == CType.STOCK) {
       y = h - (+ points[0]['2. high'] / (props.high * 1.75) * h);
@@ -59,6 +63,7 @@ const Chart: Component<IProps> = (props) => {
       ctx?.lineTo(x, y);
       ctx?.fillText(points[i][info].slice(0, 7), x, y);
     }
+    ctx!.strokeStyle = fg;
     ctx?.stroke()
   }
 

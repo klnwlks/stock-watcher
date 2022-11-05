@@ -61,10 +61,10 @@ const Stock: Component<ITicker> = (props) => {
 	<h1>{`$${props.symbol}`}</h1>	
 	  
 	  <Show when={graph()}>
-	    <h2>${+ graph()![0]['2. high']}</h2>
+	    <h2> <span>＄</span>{+ graph()![0]['2. high']}</h2>
 	    {/* calculate percentage increase */}
 	    <h2>
-	    ^ {(((+ graph()![0]['2. high'] - + graph()![1]['2. high'])
+	    <span>⇧</span>{(((+ graph()![0]['2. high'] - + graph()![1]['2. high'])
 	        / + graph()![1]['2. high']) * 100).toFixed(2)}%
 	    </h2>
 	  </Show>

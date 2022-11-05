@@ -1,0 +1,40 @@
+.settings {
+  padding: 4%;
+
+  p, label, input {
+    font-size: 1.3rem;
+  }
+
+   input[type='text'], input[type='submit'] {
+     border: none;
+     border-radius: 8px;
+   }
+
+  .key {
+    margin-bottom: 5%;
+    .content {
+      padding-left: 2%;
+    }
+  }
+
+  .theme {
+    form {
+      padding-left: 2%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .edit {
+	display: flex;
+	justify-content: space-between;
+	margin: 2%;
+	div {
+	  width: 60%;
+	}
+
+	label {
+	  margin-right: 2%;
+	}
+      }
+    }
+  }
+}

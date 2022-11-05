@@ -48,10 +48,6 @@ const Crypto: Component<ITicker> = (props) => {
 	<div>
 	  <div class={styles.symbol}>
 	    <h1>{`$${props.symbol} `}</h1>	
-	    <Show when={props.top} 
-		fallback={<h3 onClick={() => props.edit!(props.symbol)}>☆</h3>}>
-	      <h3 onClick={() => props.edit!(props.symbol)}>★</h3>
-	    </Show>
 	  </div>
 	  
 	  <Show when={graph()}>

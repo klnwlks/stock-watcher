@@ -9,7 +9,6 @@ export interface ITicker {
   key?: string[]
   top?: Boolean
   remove?: (s: string) => void;
-  edit?: (symbol: string) => void;
 }
 
 export interface IInfo {

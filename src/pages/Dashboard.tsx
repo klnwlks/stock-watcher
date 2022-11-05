@@ -37,14 +37,6 @@ const Dashboard: Component = () => {
     localStorage.tickers = JSON.stringify(tickers());
   }
 
-  const edit = (symbol: string) => {
-    let temp = tickers();
-    let i = tickers().map(e => e.symbol).indexOf(symbol);
-    temp[i].top = !temp[i].top
-    setTickers(temp);
-    localStorage.tickers = JSON.stringify(tickers());
-  }
-
   return (
     <div class={styles.dashboard}>
       <h1>Dashboard</h1>
@@ -52,11 +44,11 @@ const Dashboard: Component = () => {
 	<For each={tickers()}>{(tick: ITicker) =>
 	  <Show when={tick.type === 'STOCK'}
 	    fallback={<Crypto symbol={tick.symbol} type={tick.type}
-	    edit={edit} key={key()} remove={remove}/>} >	
+	    key={key()} remove={remove}/>} >	
 
 	    <Stock symbol={tick.symbol} 
 	    type={tick.type}
-	    key={key()} edit={edit}
+	    key={key()}
 	    remove={remove}
 	    />
 

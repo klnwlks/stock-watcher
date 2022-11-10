@@ -8,7 +8,7 @@ export default async function APIreq(symbol: string, func: string, keys: string[
 		    .catch((err) => console.log(err));
 
   if ('Note' in query) {
-    console.log('api limit reached, resending request in 1 minute.');
+    window.alert('api limit reached, resending request in 1 minute.');
     query = await new Promise((resolve) => setTimeout(async () =>{
       console.log('called')
       await axios.get(baseURL)

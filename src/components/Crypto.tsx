@@ -18,7 +18,7 @@ const Crypto: Component<ITicker> = (props) => {
   });
 
   const changeGraph = async (type: string) => {
-    let func = '', dkey: string = '';
+    let func = '', dkey = '';
     switch (type) {
       case 'f':
 	func = 'CRYPTO_INTRADAY&interval=5min&market=USD';

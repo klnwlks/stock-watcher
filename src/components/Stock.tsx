@@ -13,14 +13,14 @@ const Stock: Component<ITicker> = (props) => {
   onMount(async () => {
     // odd workaround to a bug
     if (props.type == 'CRYPTO') return;
-    let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY', props.key!);
+    let data = await APIreq(props.symbol, 'TIME_SERIES_DAILY_ADJUSTED', props.key!);
     let i = Object.entries(data['Time Series (Daily)']).slice(0,20);
 
     setGraph(i);
   });
 
   const changeGraph = async (type: string) => {
-    let func = '', dkey: string = '';
+    let func = '', dkey = '';
     switch (type) {
       case 'f':
 	func = 'TIME_SERIES_INTRADAY&interval=5min';
@@ -28,7 +28,7 @@ const Stock: Component<ITicker> = (props) => {
 	break;
 
       case 'd':
-	func = 'TIME_SERIES_DAILY';
+	func = 'TIME_SERIES_DAILY_ADJUSTED';
 	dkey = 'Time Series (Daily)';
 	break;
 

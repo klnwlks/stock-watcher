@@ -42,7 +42,7 @@ const Stock: Component<ITicker> = (props) => {
     let i = Object.entries(data[dkey]).slice(0,20);
 
     setGraph(i);
-    if (type == 'f') changeGraph('f')
+    if (type == 'f') setTimeout(() => changeGraph('f'), 300000)
   }
 
   return (

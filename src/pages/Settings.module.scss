@@ -68,4 +68,19 @@
       }
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    height: 110vh;
+    .key input {
+      margin-bottom: 4%;
+    }
+
+    .theme form {
+      grid-template-columns: 1fr;
+      input {
+	width: 100%;
+      }
+    }
+
+  }
 }

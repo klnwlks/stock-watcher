@@ -68,14 +68,23 @@ const Chart: Component<IProps> = (props) => {
 	ctx?.moveTo(x, 0)
 	ctx?.lineTo(x, h);
 	j % 2 == 1 ? y = h - 20 : y = 20;
-	ctx?.fillText(points[i][0], x - 5, y);
+	w > 400 ? ctx?.fillText(points[i][0], x - 5, y) : null;
       }
 
       ctx?.lineTo(x, y);
       y = h - (+ points[i][1][info] / (props.high * 1.75) * h);
-      ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
+
+      if (w > 400 || view()) {
+        ctx?.fillText(points[i][1][info].slice(0, 7), x, y);
+      }
+
       x = (w / points.length) * (j + 1);
       j++;
+
+      if (w > 400 || view()) {
+	i--;
+	x *= 2;
+      }
     }
     ctx?.lineTo(w, y);
 

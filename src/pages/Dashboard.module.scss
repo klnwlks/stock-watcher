@@ -47,4 +47,26 @@
     }
 
   }
+
+  @media only screen and (max-width: 768px) {
+    .add form {
+      margin-top: 6%;
+      flex-direction: column;
+      flex-wrap: wrap;
+       & > * {
+	width: 100%;
+	margin-bottom: 2%;
+       } 
+       div {
+	flex-direction: column;
+	input {
+	  width: 94%;
+	}
+	& > * { 
+	  width: 100%; 
+	  margin-bottom: 2%;
+	}
+       } 
+    }
+  } 
 }
